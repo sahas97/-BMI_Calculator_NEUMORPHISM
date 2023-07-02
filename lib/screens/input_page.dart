@@ -18,7 +18,7 @@ import 'calculator_brain.dart';
 enum Gender { male, female }
 
 class InputPage extends StatefulWidget {
-  const InputPage({super.key});
+  const InputPage({Key? key}) : super(key: key);
 
   @override
   State<InputPage> createState() => _InputPageState();
@@ -48,7 +48,7 @@ class _InputPageState extends State<InputPage> {
   String? gender;
   DateDuration? duration;
 
-  void _showDatePiker() {
+  void _showDatePicker() {
     showDatePicker(
       context: context,
       initialDate: DateTime.now(),
@@ -64,6 +64,7 @@ class _InputPageState extends State<InputPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text(
           'FitCheck BMI Tracker',
@@ -183,8 +184,7 @@ class _InputPageState extends State<InputPage> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.baseline,
-                              textBaseline: TextBaseline
-                                  .alphabetic, // if error apear uncomment this line
+                              textBaseline: TextBaseline.alphabetic,
                               children: [
                                 Text(
                                   height.toString(),
@@ -224,7 +224,7 @@ class _InputPageState extends State<InputPage> {
                                   min: 120.0,
                                   max: 220.0,
                                   value: height.toDouble(),
-                                  interval: 10,
+                                  interval: 20,
                                   showTicks: true,
                                   showLabels: true,
                                   enableTooltip: true,
@@ -261,29 +261,44 @@ class _InputPageState extends State<InputPage> {
                                   'AGE',
                                   style: kLableTextStyle,
                                 ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.baseline,
-                                  textBaseline: TextBaseline
-                                      .alphabetic, // if error apear uncomment this line
-                                  children: [
-                                    Text(
-                                      duration == null
-                                          ? "0"
-                                          : duration!.years.toString(),
-                                      style: kNumberTextStyle,
-                                    ),
-                                    const Text(
-                                      ' years',
-                                      style: kLableTextStyle,
-                                    ),
-                                  ],
+                                Flexible(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    textBaseline: TextBaseline.alphabetic,
+                                    children: [
+                                      SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.08,
+                                        child: FittedBox(
+                                          child: Text(
+                                            duration == null
+                                                ? "0"
+                                                : duration!.years.toString(),
+                                            style: kNumberTextStyle,
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.12,
+                                        child: const FittedBox(
+                                          child: Text(
+                                            ' years',
+                                            style: kLableTextStyle,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                                 AgeButton(
                                   icon: FontAwesomeIcons.anglesRight,
                                   onPressed: () {
-                                    _showDatePiker();
+                                    _showDatePicker();
                                   },
                                 ),
                               ],
@@ -297,13 +312,23 @@ class _InputPageState extends State<InputPage> {
                             cardChild: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                const Text(
-                                  'WEIGHT',
-                                  style: kLableTextStyle,
+                                const Flexible(
+                                  child: Text(
+                                    'WEIGHT',
+                                    style: kLableTextStyle,
+                                  ),
                                 ),
-                                Text(
-                                  weight.toString(),
-                                  style: kNumberTextStyle,
+                                Flexible(
+                                  child: SizedBox(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.15,
+                                    child: FittedBox(
+                                      child: Text(
+                                        weight.toString(),
+                                        style: kNumberTextStyle,
+                                      ),
+                                    ),
+                                  ),
                                 ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -346,40 +371,44 @@ class _InputPageState extends State<InputPage> {
             onTap: () {
               if (gender == null) {
                 Fluttertoast.showToast(
-                    msg: "Please select gender",
-                    toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.CENTER,
-                    backgroundColor: const Color.fromARGB(255, 130, 233, 240),
-                    textColor: Colors.white,
-                    webShowClose: true,
-                    fontSize: 16.0);
+                  msg: 'Please select gender',
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.CENTER,
+                  backgroundColor: const Color.fromARGB(255, 130, 233, 240),
+                  textColor: Colors.white,
+                  webShowClose: true,
+                  fontSize: 16.0,
+                );
               } else if (name == null || name!.isEmpty) {
                 Fluttertoast.showToast(
-                    msg: "Please enter your name",
-                    toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.CENTER,
-                    backgroundColor: const Color.fromARGB(255, 130, 233, 240),
-                    textColor: Colors.white,
-                    webShowClose: true,
-                    fontSize: 16.0);
+                  msg: 'Please enter your name',
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.CENTER,
+                  backgroundColor: const Color.fromARGB(255, 130, 233, 240),
+                  textColor: Colors.white,
+                  webShowClose: true,
+                  fontSize: 16.0,
+                );
               } else if (address == null || address!.isEmpty) {
                 Fluttertoast.showToast(
-                    msg: "Please enter your address",
-                    toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.CENTER,
-                    backgroundColor: const Color.fromARGB(255, 130, 233, 240),
-                    textColor: Colors.white,
-                    webShowClose: true,
-                    fontSize: 16.0);
+                  msg: 'Please enter your address',
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.CENTER,
+                  backgroundColor: const Color.fromARGB(255, 130, 233, 240),
+                  textColor: Colors.white,
+                  webShowClose: true,
+                  fontSize: 16.0,
+                );
               } else if (duration == null) {
                 Fluttertoast.showToast(
-                    msg: "Please enter your Age",
-                    toastLength: Toast.LENGTH_SHORT,
-                    gravity: ToastGravity.CENTER,
-                    backgroundColor: const Color.fromARGB(255, 130, 233, 240),
-                    textColor: Colors.white,
-                    webShowClose: true,
-                    fontSize: 16.0);
+                  msg: 'Please enter your Age',
+                  toastLength: Toast.LENGTH_SHORT,
+                  gravity: ToastGravity.CENTER,
+                  backgroundColor: const Color.fromARGB(255, 130, 233, 240),
+                  textColor: Colors.white,
+                  webShowClose: true,
+                  fontSize: 16.0,
+                );
               } else {
                 CalculatorBrain calc = CalculatorBrain(
                   height: height,
