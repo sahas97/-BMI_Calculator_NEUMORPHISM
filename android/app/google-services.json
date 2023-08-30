@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "392135040493",
+    "project_id": "fitcheck-856ad",
+    "storage_bucket": "fitcheck-856ad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:392135040493:android:f393d3ed6793dee6775be4",
+        "android_client_info": {
+          "package_name": "com.example.fitcheck_bmi_tracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "392135040493-2paua6h36aee2ufd6lk4fejheiob8l2m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCstNW9RWbn6186HsLloM8LpWFcywLJIY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "392135040493-2paua6h36aee2ufd6lk4fejheiob8l2m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

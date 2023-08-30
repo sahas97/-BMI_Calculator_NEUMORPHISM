@@ -1,4 +1,5 @@
 import 'package:age_calculator/age_calculator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitcheck_bmi_tracker/components/age_button.dart';
 import 'package:fitcheck_bmi_tracker/screens/result_page.dart';
 import 'package:flutter/material.dart';
@@ -61,6 +62,13 @@ class _InputPageState extends State<InputPage> {
     });
   }
 
+  final user = FirebaseAuth.instance.currentUser;
+
+  // Sign user out method
+  void signUserOut() {
+    FirebaseAuth.instance.signOut();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,6 +85,10 @@ class _InputPageState extends State<InputPage> {
           borderRadius: BorderRadius.vertical(
             bottom: Radius.circular(30),
           ),
+        ),
+        leading: IconButton(
+          icon: const Icon(Icons.logout),
+          onPressed: () => signUserOut(),
         ),
       ),
       body: Column(
